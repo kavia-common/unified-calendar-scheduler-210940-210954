@@ -1,104 +1,349 @@
-/* CSS Variables for Theme Management */
+/* Retro theme + layout (plain CSS only) */
 :root {
-  /* Light theme colors */
-  --bg-primary: #ffffff;
-  --bg-secondary: #f8f9fa;
-  --text-primary: #282c34;
-  --text-secondary: #61dafb;
-  --border-color: #e9ecef;
-  --button-bg: #007bff;
-  --button-text: #ffffff;
+  --bg: #0b1020;
+  --surface: #121a33;
+  --surface-2: #0f1730;
+  --border: rgba(255, 255, 255, 0.12);
+  --text: #eaf0ff;
+  --muted: rgba(234, 240, 255, 0.72);
+  --primary: #3b82f6;
+  --success: #06b6d4;
+  --danger: #ef4444;
+  --shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+  --radius: 14px;
+  --font: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
 }
 
-[data-theme="dark"] {
-  /* Dark theme colors */
-  --bg-primary: #1a1a1a;
-  --bg-secondary: #282c34;
-  --text-primary: #ffffff;
-  --text-secondary: #61dafb;
-  --border-color: #404040;
-  --button-bg: #0056b3;
-  --button-text: #ffffff;
+* {
+  box-sizing: border-box;
 }
 
-.App {
-  text-align: center;
-  background-color: var(--bg-primary);
-  color: var(--text-primary);
+body {
+  background: radial-gradient(1200px 600px at 20% 0%, rgba(59, 130, 246, 0.22), transparent 55%),
+    radial-gradient(900px 500px at 80% 10%, rgba(6, 182, 212, 0.18), transparent 55%),
+    var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+}
+
+a {
+  color: inherit;
+}
+
+.AppShell {
   min-height: 100vh;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  display: grid;
+  grid-template-columns: 260px 1fr;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.Sidebar {
+  padding: 18px;
+  border-right: 1px solid var(--border);
+  background: linear-gradient(180deg, rgba(18, 26, 51, 0.9), rgba(15, 23, 48, 0.9));
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: var(--bg-secondary);
-  min-height: 100vh;
+.Brand {
   display: flex;
-  flex-direction: column;
+  gap: 10px;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: var(--text-primary);
-  transition: background-color 0.3s ease;
-  position: relative;
+  margin-bottom: 18px;
 }
 
-.App-link {
-  color: var(--text-secondary);
-  transition: color 0.3s ease;
+.BrandMark {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, rgba(59, 130, 246, 1), rgba(6, 182, 212, 1));
+  box-shadow: var(--shadow);
 }
 
-.theme-toggle {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  background-color: var(--button-bg);
-  color: var(--button-text);
-  border: none;
-  border-radius: 8px;
-  padding: 10px 20px;
-  font-size: 14px;
-  font-weight: 600;
+.BrandText h1 {
+  font-size: 15px;
+  margin: 0;
+  letter-spacing: 0.4px;
+}
+.BrandText p {
+  margin: 2px 0 0;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.Nav {
+  display: grid;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.NavBtn {
+  width: 100%;
+  text-align: left;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border);
+  color: var(--text);
   cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.theme-toggle:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-  opacity: 0.9;
+.NavBtn[aria-current="page"] {
+  border-color: rgba(59, 130, 246, 0.7);
+  background: rgba(59, 130, 246, 0.18);
 }
 
-.theme-toggle:active {
-  transform: translateY(0);
+.SideFooter {
+  margin-top: 18px;
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
+  color: var(--muted);
+  font-size: 12px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.Main {
+  display: grid;
+  grid-template-rows: 64px 1fr;
+}
+
+.Topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--border);
+  background: rgba(18, 26, 51, 0.6);
+  backdrop-filter: blur(10px);
+}
+
+.TopbarTitle {
+  display: grid;
+  gap: 2px;
+}
+.TopbarTitle h2 {
+  margin: 0;
+  font-size: 15px;
+  letter-spacing: 0.3px;
+}
+.TopbarTitle span {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.TopbarActions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.Btn {
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--text);
+  padding: 9px 12px;
+  border-radius: 12px;
+  cursor: pointer;
+}
+
+.BtnPrimary {
+  border-color: rgba(59, 130, 246, 0.7);
+  background: rgba(59, 130, 246, 0.22);
+}
+
+.BtnDanger {
+  border-color: rgba(239, 68, 68, 0.7);
+  background: rgba(239, 68, 68, 0.18);
+}
+
+.Content {
+  padding: 18px;
+}
+
+.Card {
+  background: rgba(18, 26, 51, 0.72);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.Split {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 14px;
+}
+
+@media (max-width: 980px) {
+  .AppShell {
+    grid-template-columns: 1fr;
   }
-  to {
-    transform: rotate(360deg);
+  .Sidebar {
+    border-right: 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .Split {
+    grid-template-columns: 1fr;
   }
 }
 
-/* Responsive design for mobile */
-@media (max-width: 768px) {
-  .theme-toggle {
-    top: 10px;
-    right: 10px;
-    padding: 8px 16px;
-    font-size: 12px;
-  }
+.CalendarHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px;
+  border-bottom: 1px solid var(--border);
+}
+
+.PillGroup {
+  display: flex;
+  gap: 8px;
+}
+
+.Pill {
+  padding: 7px 10px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.03);
+  cursor: pointer;
+  color: var(--text);
+  font-size: 13px;
+}
+
+.Pill[aria-pressed="true"] {
+  border-color: rgba(6, 182, 212, 0.8);
+  background: rgba(6, 182, 212, 0.18);
+}
+
+.GridMonth {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  border-top: 1px solid var(--border);
+}
+
+.GridCell {
+  min-height: 110px;
+  padding: 10px;
+  border-right: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.GridCell:nth-child(7n) {
+  border-right: 0;
+}
+
+.DayNum {
+  color: var(--muted);
+  font-size: 12px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.EventChip {
+  margin-top: 8px;
+  padding: 7px 8px;
+  border-radius: 12px;
+  border: 1px solid rgba(59, 130, 246, 0.55);
+  background: rgba(59, 130, 246, 0.18);
+  cursor: pointer;
+  font-size: 12px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.Form {
+  padding: 14px;
+}
+
+.Field {
+  display: grid;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+
+.Label {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.Input,
+.Textarea,
+.Select {
+  width: 100%;
+  padding: 10px 10px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: rgba(15, 23, 48, 0.75);
+  color: var(--text);
+  outline: none;
+}
+
+.Textarea {
+  min-height: 78px;
+  resize: vertical;
+}
+
+.Row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.ToastWrap {
+  position: fixed;
+  bottom: 18px;
+  right: 18px;
+  display: grid;
+  gap: 10px;
+  z-index: 50;
+}
+
+.Toast {
+  width: min(380px, calc(100vw - 36px));
+  padding: 12px;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  background: rgba(18, 26, 51, 0.85);
+  box-shadow: var(--shadow);
+}
+
+.ToastTitle {
+  font-size: 13px;
+  margin: 0 0 4px;
+}
+.ToastBody {
+  margin: 0;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.DialogBackdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  display: grid;
+  place-items: center;
+  padding: 18px;
+  z-index: 40;
+}
+
+.Dialog {
+  width: min(720px, 100%);
+  border-radius: 16px;
+  border: 1px solid var(--border);
+  background: rgba(18, 26, 51, 0.95);
+  box-shadow: var(--shadow);
+}
+
+.DialogHeader {
+  padding: 14px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.DialogHeader h3 {
+  margin: 0;
+  font-size: 14px;
+}
+
+.DialogBody {
+  padding: 14px;
 }
